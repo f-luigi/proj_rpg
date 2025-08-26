@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Character Sheet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⚔️ RPG Character Sheet</h1>
+        
+        <div class="character-info">
+            <div class="form-group">
+                <label for="characterName">Nome do Personagem</label>
+                <input type="text" id="characterName" placeholder="Digite o nome...">
+            </div>
+            <div class="form-group">
+                <label for="characterClass">Classe</label>
+                <select id="characterClass">
+                    <option value="">Selecione uma classe</option>
+                    <option value="Guerreiro">Guerreiro</option>
+                    <option value="Mago">Mago</option>
+                    <option value="Ladino">Ladino</option>
+                    <option value="Clérigo">Clérigo</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Bárbaro">Bárbaro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="characterRace">Raça</label>
+                <input type="text" id="characterRace" placeholder="Ex: Humano, Elfo...">
+            </div>
+            <div class="form-group">
+                <label for="characterLevel">Nível</label>
+                <input type="number" id="characterLevel" min="1" max="20" value="1">
+            </div>
+        </div>
+
+        <div class="attributes">
+            <div class="attribute">
+                <div class="attribute-name">💪 Força</div>
+                <div class="attribute-value" id="strength">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('strength', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('strength', 1)">+</button>
+                </div>
+            </div>
+            <div class="attribute">
+                <div class="attribute-name">🏃 Destreza</div>
+                <div class="attribute-value" id="dexterity">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('dexterity', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('dexterity', 1)">+</button>
+                </div>
+            </div>
+            <div class="attribute">
+                <div class="attribute-name">🛡️ Constituição</div>
+                <div class="attribute-value" id="constitution">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('constitution', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('constitution', 1)">+</button>
+                </div>
+            </div>
+            <div class="attribute">
+                <div class="attribute-name">🧠 Inteligência</div>
+                <div class="attribute-value" id="intelligence">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('intelligence', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('intelligence', 1)">+</button>
+                </div>
+            </div>
+            <div class="attribute">
+                <div class="attribute-name">🔮 Sabedoria</div>
+                <div class="attribute-value" id="wisdom">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('wisdom', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('wisdom', 1)">+</button>
+                </div>
+            </div>
+            <div class="attribute">
+                <div class="attribute-name">✨ Carisma</div>
+                <div class="attribute-value" id="charisma">10</div>
+                <div class="attribute-controls">
+                    <button class="btn btn-small" onclick="changeAttribute('charisma', -1)">-</button>
+                    <button class="btn btn-small" onclick="changeAttribute('charisma', 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('skills')">
+                <span class="section-title">🎯 Habilidades</span>
+                <span class="toggle-icon" id="skills-icon">▼</span>
+            </div>
+            <div class="section-content" id="skills-content">
+                <div class="skills-grid">
+                    <div class="skill">
+                        <span>Atletismo</span>
+                        <input type="number" id="athletics" min="0" max="20" value="0">
+                    </div>
+                    <div class="skill">
+                        <span>Furtividade</span>
+                        <input type="number" id="stealth" min="0" max="20" value="0">
+                    </div>
+                    <div class="skill">
+                        <span>Investigação</span>
+                        <input type="number" id="investigation" min="0" max="20" value="0">
+                    </div>
+                    <div class="skill">
+                        <span>Persuasão</span>
+                        <input type="number" id="persuasion" min="0" max="20" value="0">
+                    </div>
+                    <div class="skill">
+                        <span>Medicina</span>
+                        <input type="number" id="medicine" min="0" max="20" value="0">
+                    </div>
+                    <div class="skill">
+                        <span>Percepção</span>
+                        <input type="number" id="perception" min="0" max="20" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('equipment')">
+                <span class="section-title">⚔️ Equipamentos</span>
+                <span class="toggle-icon" id="equipment-icon">▼</span>
+            </div>
+            <div class="section-content" id="equipment-content">
+                <div class="equipment-list" id="equipmentList">
+                    <div class="equipment-item">
+                        <input type="text" placeholder="Nome do item" class="equipment-name">
+                        <input type="number" placeholder="Qtd" class="equipment-quantity" min="1" value="1">
+                        <button class="btn btn-danger btn-small" onclick="removeEquipment(this)">Remover</button>
+                    </div>
+                </div>
+                <button class="btn" onclick="addEquipment()">Adicionar Item</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('notes')">
+                <span class="section-title">📝 Anotações</span>
+                <span class="toggle-icon" id="notes-icon">▼</span>
+            </div>
+            <div class="section-content" id="notes-content">
+                <div class="form-group">
+                    <textarea id="characterNotes" rows="6" placeholder="Escreva suas anotações sobre o personagem..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="saveCharacter()">💾 Salvar Personagem</button>
+            <button class="btn btn-danger" onclick="resetCharacter()">🔄 Resetar Tudo</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados do personagem
+        let characterData = {
+            name: '',
+            class: '',
+            race: '',
+            level: 1,
+            attributes: {
+                strength: 10,
+                dexterity: 10,
+                constitution: 10,
+                intelligence: 10,
+                wisdom: 10,
+                charisma: 10
+            },
+            skills: {
+                athletics: 0,
+                stealth: 0,
+                investigation: 0,
+                persuasion: 0,
+                medicine: 0,
+                perception: 0
+            },
+            equipment: [],
+            notes: ''
+        };
+
+        // Carregar dados salvos ao iniciar
+        window.onload = function() {
+            loadCharacter();
+        };
+
+        // Função para alterar atributos
+        function changeAttribute(attribute, change) {
+            const currentValue = parseInt(document.getElementById(attribute).textContent);
+            const newValue = Math.max(1, Math.min(20, currentValue + change));
+            document.getElementById(attribute).textContent = newValue;
+            characterData.attributes[attribute] = newValue;
+            saveCharacter();
+        }
+
+        // Função para alternar seções
+        function toggleSection(sectionName) {
+            const content = document.getElementById(sectionName + '-content');
+            const icon = document.getElementById(sectionName + '-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        // Função para adicionar equipamento
+        function addEquipment() {
+            const equipmentList = document.getElementById('equipmentList');
+            const newItem = document.createElement('div');
+            newItem.className = 'equipment-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="Nome do item" class="equipment-name">
+                <input type="number" placeholder="Qtd" class="equipment-quantity" min="1" value="1">
+                <button class="btn btn-danger btn-small" onclick="removeEquipment(this)">Remover</button>
+            `;
+            equipmentList.appendChild(newItem);
+        }
+
+        // Função para remover equipamento
+        function removeEquipment(button) {
+            button.parentElement.remove();
+            saveCharacter();
+        }
+
+        // Função para salvar personagem
+        function saveCharacter() {
+            // Coletar dados básicos
+            characterData.name = document.getElementById('characterName').value;
+            characterData.class = document.getElementById('characterClass').value;
+            characterData.race = document.getElementById('characterRace').value;
+            characterData.level = parseInt(document.getElementById('characterLevel').value);
+
+            // Coletar habilidades
+            characterData.skills.athletics = parseInt(document.getElementById('athletics').value);
+            characterData.skills.stealth = parseInt(document.getElementById('stealth').value);
+            characterData.skills.investigation = parseInt(document.getElementById('investigation').value);
+            characterData.skills.persuasion = parseInt(document.getElementById('persuasion').value);
+            characterData.skills.medicine = parseInt(document.getElementById('medicine').value);
+            characterData.skills.perception = parseInt(document.getElementById('perception').value);
+
+            // Coletar equipamentos
+            characterData.equipment = [];
+            const equipmentItems = document.querySelectorAll('.equipment-item');
+            equipmentItems.forEach(item => {
+                const name = item.querySelector('.equipment-name').value;
+                const quantity = parseInt(item.querySelector('.equipment-quantity').value) || 1;
+                if (name.trim()) {
+                    characterData.equipment.push({ name, quantity });
+                }
+            });
+
+            // Coletar anotações
+            characterData.notes = document.getElementById('characterNotes').value;
+
+            // Salvar no localStorage
+            localStorage.setItem('rpgCharacter', JSON.stringify(characterData));
+            
+            // Mostrar confirmação
+            alert('Personagem salvo com sucesso! 🎉');
+        }
+
+        // Função para carregar personagem
+        function loadCharacter() {
+            const savedData = localStorage.getItem('rpgCharacter');
+            if (savedData) {
+                characterData = JSON.parse(savedData);
+                
+                // Carregar dados básicos
+                document.getElementById('characterName').value = characterData.name || '';
+                document.getElementById('characterClass').value = characterData.class || '';
+                document.getElementById('characterRace').value = characterData.race || '';
+                document.getElementById('characterLevel').value = characterData.level || 1;
+
+                // Carregar atributos
+                Object.keys(characterData.attributes).forEach(attr => {
+                    document.getElementById(attr).textContent = characterData.attributes[attr];
+                });
+
+                // Carregar habilidades
+                Object.keys(characterData.skills).forEach(skill => {
+                    document.getElementById(skill).value = characterData.skills[skill];
+                });
+
+                // Carregar equipamentos
+                const equipmentList = document.getElementById('equipmentList');
+                equipmentList.innerHTML = '';
+                characterData.equipment.forEach(item => {
+                    const newItem = document.createElement('div');
+                    newItem.className = 'equipment-item';
+                    newItem.innerHTML = `
+                        <input type="text" placeholder="Nome do item" class="equipment-name" value="${item.name}">
+                        <input type="number" placeholder="Qtd" class="equipment-quantity" min="1" value="${item.quantity}">
+                        <button class="btn btn-danger btn-small" onclick="removeEquipment(this)">Remover</button>
+                    `;
+                    equipmentList.appendChild(newItem);
+                });
+
+                // Se não há equipamentos, adicionar um item vazio
+                if (characterData.equipment.length === 0) {
+                    addEquipment();
+                }
+
+                // Carregar anotações
+                document.getElementById('characterNotes').value = characterData.notes || '';
+            } else {
+                // Se não há dados salvos, adicionar um item de equipamento vazio
+                addEquipment();
+            }
+        }
+
+        // Função para resetar personagem
+        function resetCharacter() {
+            if (confirm('Tem certeza que deseja resetar todos os dados? Esta ação não pode ser desfeita!')) {
+                localStorage.removeItem('rpgCharacter');
+                location.reload();
+            }
+        }
+
+        // Auto-salvar quando campos são alterados
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input, textarea, select')) {
+                setTimeout(saveCharacter, 500); // Salva após 500ms de inatividade
+            }
+        });
+    </script>
+</body>
+</html>
